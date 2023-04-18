@@ -22,16 +22,19 @@ FOR /F "TOKENS=1,* DELIMS==" %%v IN ('WMIC SYSTEMENCLOSURE GET SMBiosAssetTag /F
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 rem Output the proper format in an output.txt 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-set "spaces= | " 
+
+
+
+
 (
-	echo %SMBIOSAssetTag%
-	echo  !spaces! 
-	echo %SerialNumber%
-	echo  !spaces!
-	echo %date%
-	echo  !spaces! 
-	echo %time%
-) >> output.txt
+	echo|set /p= %SMBIOSAssetTag%
+	echo:
+	echo|set /p= %SerialNumber%
+	echo:
+	echo|set /p= %date%
+	echo:
+	echo|set /p= %time%
+) >> input.txt
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 rem powershell to start the script
@@ -56,6 +59,7 @@ echo "TEST"
 
 :cleanup
 del output.txt
+del input.txt
 EXIT /B 0
 
 :end
