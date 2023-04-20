@@ -22,25 +22,23 @@ FOR /F "TOKENS=1,* DELIMS==" %%v IN ('WMIC SYSTEMENCLOSURE GET SMBiosAssetTag /F
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 rem Output the proper format in an output.txt 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-
-
-
+SET MYDATE=%DATE:~4,8%
+SET	MYTIME=%TIME:~0,8%
 (
 	echo|set /p= %SMBIOSAssetTag%
 	echo:
 	echo|set /p= %SerialNumber%
 	echo:
-	echo|set /p= %date%
+	echo|set /p= %MYDATE%
 	echo:
-	echo|set /p= %time%
+	echo|set /p= %MYTIME%
 ) >> input.txt
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 rem powershell to start the script
 rem https://stackoverflow.com/questions/19335004/how-to-run-a-powershell-script-from-a-batch-file
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& {Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File "".\Script.ps1""' -Verb RunAs}"
+PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& {Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File ".\Script.ps1"' -Verb RunAs}"
 
 TIMEOUT /T 5
 
