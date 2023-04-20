@@ -8,7 +8,7 @@ setlocal EnableDelayedExpansion
 rem Find the Dell and Serial Tag from the BIOS
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-cd %scriptLocationPath%
+pushd %scriptLocationPath%
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 rem Get SerialNumber and AssetTag from bios
@@ -22,6 +22,8 @@ FOR /F "TOKENS=1,* DELIMS==" %%v IN ('WMIC SYSTEMENCLOSURE GET SMBiosAssetTag /F
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 rem Output the proper format in an output.txt 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+if [%SMBIOSAssetTag%]==[] (echo "[blankAsset]") >> %SMBIOSAssetTag%
+
 SET MYDATE=%DATE:~4,8%
 SET	MYTIME=%TIME:~0,8%
 (
@@ -58,6 +60,7 @@ echo "TEST"
 :cleanup
 del output.txt
 del input.txt
+popd
 EXIT /B 0
 
 :end
