@@ -22,7 +22,6 @@ FOR /F "TOKENS=1,* DELIMS==" %%v IN ('WMIC SYSTEMENCLOSURE GET SMBiosAssetTag /F
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 rem Output the proper format in an output.txt 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-if [%SMBIOSAssetTag%]==[] (echo "[blankAsset]") >> %SMBIOSAssetTag%
 
 SET MYDATE=%DATE:~4,8%
 SET	MYTIME=%TIME:~0,8%
