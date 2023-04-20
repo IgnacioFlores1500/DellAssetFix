@@ -19,14 +19,14 @@ rem https://stackoverflow.com/questions/18115603/i-need-a-windows-command-line-s
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 for /f "delims=" %%a in ('wmic SYSTEMENCLOSURE get SerialNumber') do for /f %%b in ("%%a") do set "SerialNumber=%%b"
-FOR /F "TOKENS=1,* DELIMS==" %%v IN ('WMIC SYSTEMENCLOSURE GET SMBiosAssetTag /FORMAT:VALUE') DO IF /I "%%v" == "SMBIOSAssetTag" SET SMBIOSAssetTag=%%w
+::FOR /F "TOKENS=1,* DELIMS==" %%v IN ('WMIC SYSTEMENCLOSURE GET SMBiosAssetTag /FORMAT:VALUE') DO IF /I "%%v" == "SMBIOSAssetTag" SET SMBIOSAssetTag=%%w
 ::FOR /F "TOKENS=1,* DELIMS==" %%v IN ('WMIC SYSTEMENCLOSURE GET SerialNumber /FORMAT:VALUE') DO IF /I "%%v" == "SerialNumber" SET SerialNumber=%%w	
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 rem Output the proper format in an output.txt 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-set /p AssetTag="Enter id: "
+set /p AssetTag="Enter AssetTag: "
 
 SET MYDATE=%DATE:~4,8%
 SET	MYTIME=%TIME:~0,8%
@@ -48,6 +48,13 @@ PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& {Start-Process PowerSh
 
 TIMEOUT /T 5
 
+::https://ss64.com/nt/start.html
+pushd C:\Program Files (x86)\Quest\KACE
+
+start "Inventory" "C:\Program Files (x86)\Quest\KACE\KInventory.exe" /w
+start "Inventory" "C:\Program Files (x86)\Quest\KACE\Inventory.exe" /w
+
+popd
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 rem deleted output.txt
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
