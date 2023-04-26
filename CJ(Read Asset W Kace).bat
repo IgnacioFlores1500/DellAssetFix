@@ -49,12 +49,19 @@ PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& {Start-Process PowerSh
 TIMEOUT /T 5
 
 ::https://ss64.com/nt/start.html
+
+
+taskkill /f /im KMenu.exe
+taskkill /f /im konea.exe
+taskkill /f /im KSchedulerSvc.exe
+taskkill /f /im KSWMeterSvc.exe
 pushd C:\Program Files (x86)\Quest\KACE
 
-start "Inventory" "C:\Program Files (x86)\Quest\KACE\KInventory.exe" /w
+start "Inventory" "C:\Program Files (x86)\Quest\KACE\KDeploy.exe" /w
 start "Inventory" "C:\Program Files (x86)\Quest\KACE\Inventory.exe" /w
 
 popd
+timeout /T 5
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 rem deleted output.txt
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
